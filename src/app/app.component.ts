@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +7,25 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'angular-validation-form';
+  public title = 'angular-validation-form';
+  public checkoutForm: any;
+
+  constructor(
+    private formBuilder: FormBuilder
+  ) {
+
+    this.checkoutForm = this.formBuilder.group({
+      name: '',
+      email: '',
+      phone: '',
+      job: '',
+      password: ''
+    });
+
+  }
+
+  onSubmit(formData) {
+    console.table(formData);
+  }
+
 }
