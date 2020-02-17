@@ -2,58 +2,93 @@
   <h1 class="my-5">Formulario de registro</h1>
 
   <form [formGroup]="checkoutForm" (ngSubmit)="onSubmit(checkoutForm.value)">
-    <div class="form-group input-group">
-      <div class="input-group-prepend">
-        <span class="input-group-text"> 
-          <i class="fa fa-user"></i> 
-        </span>
-      </div>
-      <input id="name" name="name" class="form-control" placeholder="Nombre y apellidos" type="name" formControlName="name">
+
+    <div class="form-group input-group">
+      <div class="input-group-prepend">
+        <span class="input-group-text">
+          <i class="fa fa-user"></i> </span>
+      </div>
+      <input id="name" class="form-control" name="name" placeholder="Nombre y apellido" type="text"
+        formControlName="name" [class.is-invalid]="submitted && f.name.errors">
+      <div class="invalid-feedback" *ngIf="submitted && f.name.errors">
+        <span *ngIf="f.name.errors.required">Username is required.</span>
+      </div>
     </div>
 
-    <div class="form-group input-group">
-      <div class="input-group-prepend">
-        <span class="input-group-text"> 
-          <i class="fa fa-envelope"></i> 
-        </span>
-      </div>
-      <input id="email" name="email" class="form-control" placeholder="Email" type="email" formControlName="email">
+    <!-- form-group// -->
+
+    <div class="form-group input-group">
+      <div class="input-group-prepend">
+        <span class="input-group-text">
+          <i class="fa fa-envelope"></i>
+        </span>
+      </div>
+      <input id="email" class="form-control" name="email" placeholder="Email" type="email" formControlName="email"
+        [class.is-invalid]="submitted && f.email.errors">
+
+      <div class="invalid-feedback" *ngIf="submitted && f.email.errors">
+        <span *ngIf="f.email.errors.required">Email is required</span>
+        <span *ngIf="f.email.errors.email">Email must be a valid email address</span>
+      </div>
     </div>
 
-    <div class="form-group input-group">
-      <div class="input-group-prepend">
-        <span class="input-group-text"> 
-          <i class="fa fa-phone"></i> 
-        </span>
-      </div>
-      <input id="phone" name="phone" class="form-control" placeholder="Teléfono" type="phone" formControlName="phone">
+    <!-- form-group// -->
+
+    <div class="form-group input-group">
+      <div class="input-group-prepend">
+        <span class="input-group-text">
+          <i class="fa fa-phone"></i>
+        </span>
+      </div>
+      <input id="phone" name="phone" class="form-control" placeholder="Teléfono" type="tel" formControlName="phone"
+        [class.is-invalid]="submitted && f.phone.errors">
+
+      <div class="invalid-feedback" *ngIf="submitted && f.phone.errors">
+        <span *ngIf="f.phone.errors.required">Phone is required</span>
+        <span *ngIf="f.phone.errors.minlength">Phone must be at least 9 characters</span>
+      </div>
     </div>
 
-    <div class="form-group input-group">
-      <div class="input-group-prepend">
-        <span class="input-group-text"> 
-          <i class="fa fa-building"></i> 
-        </span>
-      </div>
+    <!-- form-group// -->
+
+    <div class="form-group input-group">
+      <div class="input-group-prepend">
+        <span class="input-group-text">
+          <i class="fa fa-building"></i>
+        </span>
+      </div>
+
       <select id="job" name="job" class="form-control" formControlName="job">
-        <option value="0" selected>Diseñador</option>
-        <option value="1">Desarrollador</option>
-        <option value="2">Maquetador</option>
-        <option value="3">Full Stack</option>
+        <option value="0" selected>Profesión</option>
+        <option value="1">Diseñador</option>
+        <option value="2">Desarrollador</option>
+        <option value="3">Maquetador</option>
+        <option value="4">Full-stack</option>
       </select>
     </div>
 
-    <div class="form-group input-group">
-      <div class="input-group-prepend">
-        <span class="input-group-text"> 
-          <i class="fa fa-lock"></i> 
-        </span>
-      </div>
-      <input id="password" name="password" class="form-control" placeholder="Contraseña" type="password" formControlName="password">
+    <!-- form-group end.// -->
+
+    <div class="form-group input-group">
+      <div class="input-group-prepend">
+        <span class="input-group-text">
+          <i class="fa fa-lock"></i>
+        </span>
+      </div>
+      <input id="password" name="password" class="form-control" placeholder="Contraseña" type="password"
+        formControlName="password" [class.is-invalid]="submitted && f.password.errors">
+
+      <div class="invalid-feedback" *ngIf="submitted && f.password.errors">
+        <span *ngIf="f.password.errors.required">Password is required</span>
+        <span *ngIf="f.password.errors.minlength">Password must be at least 6 characters</span>
+      </div>
     </div>
+
+    <!-- form-group// -->
 
     <div class="form-group">
       <button type="submit" class="btn btn-primary btn-block">Crear cuenta</button>
     </div>
+
   </form>
 </div>

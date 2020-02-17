@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-root',
@@ -7,25 +7,41 @@ import { FormBuilder } from '@angular/forms';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  public title = 'angular-validation-form';
   public checkoutForm: any;
+  public submitted = false;
 
   constructor(
     private formBuilder: FormBuilder
   ) {
 
+  }
+
+  ngOnInit() {
+    this.createForm();
+  }
+
+  createForm() {
     this.checkoutForm = this.formBuilder.group({
-      name: '',
-      email: '',
-      phone: '',
-      job: '',
-      password: ''
+      name: ['', [Validators.required]],
+      email: ['', [Validators.required, Validators.email]],
+      phone: ['', [Validators.required, Validators.minLength(9)]],
+      job: [''],
+      password: ['', [Validators.required, Validators.minLength(6)]]
     });
-
   }
 
-  onSubmit(formData) {
-    console.table(formData);
+  get f() {
+    return this.checkoutForm.controls;
   }
 
+  onSubmit(customerData) {
+    this.submitted = true;
+
+    if (this.checkoutForm.invalid) {
+      return;
+    } else {
+      alert('SUCCESS!! :-)');
+      console.table(customerData);
+    }
+  }
 }
